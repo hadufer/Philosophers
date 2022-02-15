@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/11 17:52:32 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/15 19:02:49 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,36 @@
 #include <pthread.h>
 #include <stdio.h>
 
+void	eat(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->l_f);
+	putstr_ph("has taken a fork", ph);
+	pthread_mutex_lock(ph->r_f);
+	putstr_ph("has taken a fork", ph);
+	putstr_ph("is eating", ph);
+	ph->time_begin_eat = actual_time();
+	pthread_create(ph->thread_id, NULL, routine_watcher, (void *)(ph));
+	ft_usleep(ph->conf->time_to_eat);
+}
+
+void	sleep_think(t_philo *ph)
+{
+	pthread_mutex_unlock(&ph->l_f);
+	pthread_mutex_unlock(ph->r_f);
+	putstr_ph("is sleeping", ph);
+	ft_usleep(ph->conf->time_to_sleep);
+	putstr_ph("is thinking", ph);
+}
+
 void	*routine(void *conf_ph)
 {
 	t_philo	*ph;
 
 	ph = (t_philo *)conf_ph;
-	pthread_mutex_lock(&ph->l_f);
-	pthread_mutex_lock(ph->r_f);
-	pthread_mutex_lock(&ph->conf->writer_m);
-	printf("%ld %d has taken a fork\n", actual_time() - ph->conf->start_time_ms, ph->ph_id);
-	printf("%ld %d is eating\n", actual_time() - ph->conf->start_time_ms, ph->ph_id);
-	pthread_mutex_unlock(&ph->conf->writer_m);
-	ft_usleep(ph->conf->time_to_eat);
-	pthread_mutex_unlock(&ph->l_f);
-	pthread_mutex_unlock(ph->r_f);
-	pthread_mutex_lock(&ph->conf->writer_m);
-	printf("%ld %d has taken a fork\n", actual_time() - ph->conf->start_time_ms, ph->ph_id);
-	return NULL;
+	while (1)
+	{
+		eat(ph);
+		sleep_think(ph);
+	}
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadufer <hadufer@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:06:03 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/06 13:06:49 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/15 18:03:53 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int	init_conf_args(int argc, char **argv, t_config *conf)
 	conf->time_to_die = ft_atoi(argv[2]);
 	conf->time_to_eat = ft_atoi(argv[3]);
 	conf->time_to_sleep = ft_atoi(argv[4]);
+	conf->start_time_ms = actual_time();
 	conf->ph = malloc(sizeof(t_philo) * conf->number_of_philosophers);
+	if (pthread_mutex_init(&conf->game_over_m, NULL) != 0)
+		return (0);
 	if (pthread_mutex_init(&conf->writer_m, NULL) != 0)
 		return (0);
 	if (argc == 6)
@@ -80,10 +83,11 @@ void	init_conf_ph(t_config *conf)
 	while (i < conf->number_of_philosophers)
 	{
 		(conf->ph + i)->conf = conf;
-		(conf->ph + i)->ph_id = i;
+		(conf->ph + i)->ph_id = i + 1;
+		(conf->ph + i)->is_dead = 0;
 		(conf->ph + i)->thread_id = malloc(sizeof(pthread_t));
-		(conf->ph + i)->l_f = 1;
-		pthread_mutex_init(&(conf->ph + i)->l_f_m, NULL);
+		(conf->ph + i)->r_f = NULL;
+		pthread_mutex_init(&(conf->ph + i)->l_f, NULL);
 		if (i == (conf->number_of_philosophers - 1))
 			(conf->ph + i)->r_f = &conf->ph->l_f;
 		else

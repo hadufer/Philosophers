@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadufer <hadufer@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:38 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/06 13:06:59 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/15 18:19:22 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ typedef struct s_config t_config;
 
 typedef struct s_philo
 {
-	int	fork; // number of fork actually in possession of the philo
-	int	l_f;
-	int	*r_f;
 	int	ph_id; // the id of the philo
+	int	is_dead; // tell us if philo is supposed to be dead
+	long int time_begin_eat; // the time when ph beginned to eat
 	t_config	*conf;	// pointer to conf
 	pthread_t	*thread_id; // actual thread
-	pthread_mutex_t	*r_f_m; // mutex protect right fork
-	pthread_mutex_t	l_f_m; // mutex protext left fork
+	pthread_mutex_t	*r_f; // mutex protect right fork
+	pthread_mutex_t	l_f; // mutex protext left fork
 }	t_philo;
 
 typedef struct s_config {
@@ -41,11 +40,15 @@ typedef struct s_config {
 	long int	start_time_ms;
 	t_philo	*ph; // philo tab
 	pthread_mutex_t	writer_m; // mutex
+	pthread_mutex_t	game_over_m; // mutex game over
 }	t_config;
 
 int		check_args(int argc, char **argv);
 int		init_conf_args(int argc, char **argv, t_config *conf);
 void	init_conf_ph(t_config *conf);
+void	launch_thread(t_config *conf);
+void	*routine(void *conf_ph);
+void	*routine_watcher(void *conf_ph);
 
 // UTILS
 long int	actual_time(void);
@@ -53,4 +56,5 @@ void		ft_usleep(int ms);
 int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 void		ft_putstr_fd(char *s, int fd);
+void		putstr_ph(char *str, t_philo *ph);
 #endif

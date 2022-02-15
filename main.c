@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadufer <hadufer@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:42 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/06 13:06:45 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/15 18:22:42 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		init_conf_ph(&conf);
+		launch_thread(&conf);
+		pthread_mutex_lock(&conf.game_over_m);
 	}
 }
