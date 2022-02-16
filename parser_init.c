@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:06:03 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 14:16:32 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:52:00 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	init_conf_args(int argc, char **argv, t_config *conf)
 	conf->ph = malloc(sizeof(t_philo) * conf->number_of_philosophers);
 	pthread_mutex_init(&conf->game_over_m, NULL);
 	pthread_mutex_init(&conf->writer_m, NULL);
-	pthread_mutex_init(&conf->death_print_m, NULL);
+	pthread_mutex_init(&conf->death_m, NULL);
 	if (argc == 6)
 		conf->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	else

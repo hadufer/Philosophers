@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:38 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 14:16:35 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:51:32 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_config {
 	t_philo	*ph; // philo tab
 	pthread_mutex_t	writer_m; // mutex
 	pthread_mutex_t	game_over_m; // mutex game over
-	pthread_mutex_t	death_print_m; // death mutex
+	pthread_mutex_t	death_m; // mutex game over
 }	t_config;
 
 int		check_args(int argc, char **argv);

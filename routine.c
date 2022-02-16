@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 12:20:06 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:35:49 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*routine(void *conf_ph)
 
 	ph = (t_philo *)conf_ph;
 	if ((ph->ph_id % 2) == 0)
-		ft_usleep(ph->conf->time_to_eat / 100);
+		ft_usleep(ph->conf->time_to_eat / 10);
 	pthread_create(&watch, NULL, routine_watcher, (void *)(ph));
 	pthread_detach(watch);
 	while (1)
