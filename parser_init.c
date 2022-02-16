@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:06:03 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 14:52:00 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 18:45:03 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int	init_conf_args(int argc, char **argv, t_config *conf)
 	conf->time_to_die = ft_atoi(argv[2]);
 	conf->time_to_eat = ft_atoi(argv[3]);
 	conf->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		conf->need_to_eat = ft_atoi(argv[5]);
+	else
+		conf->need_to_eat = 0;
+	conf->ph_already_eat = 0;
 	conf->start_time_ms = actual_time();
 	conf->stop_print = 0;
 	conf->ph = malloc(sizeof(t_philo) * conf->number_of_philosophers);

@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:15:58 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 14:52:12 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 18:50:53 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*routine_watcher(void *conf_ph)
 	ph = (t_philo *)conf_ph;
 	while (1)
 	{
+		if (ph->conf->need_to_eat && (ph->eat_time == ph->conf->need_to_eat))
+			break ;
 		if (ph->time_begin_eat + ph->conf->time_to_die <= actual_time())
 		{
 			ph->conf->stop_print = 1;
@@ -30,7 +32,23 @@ void	*routine_watcher(void *conf_ph)
 			return (NULL);
 		}
 	}
-	// Unlock mutex game_over
+	return (NULL);
+}
+
+void	*eat_time_watcher(void *v_conf)
+{
+	t_config	*conf;
+	int	ph_count;
+
+	ph_count = 0;
+	conf = (t_config *)v_conf;
+	while (1)
+	{
+		if (conf->ph_already_eat == conf->number_of_philosophers)
+			break ;
+	}
+	printf("%d philosophers eated %d time(s)\n", conf->number_of_philosophers, conf->need_to_eat);
+	pthread_mutex_unlock(&conf->game_over_m);
 	return (NULL);
 }
 
@@ -40,6 +58,11 @@ void	launch_thread(t_config *conf)
 
 	i = 0;
 	pthread_mutex_lock(&conf->game_over_m);
+	if (conf->need_to_eat)
+	{
+		pthread_create(&conf->eat_time_watcher, NULL, eat_time_watcher, (void *)(conf));
+		pthread_detach(conf->eat_time_watcher);
+	}
 	while (i < conf->number_of_philosophers)
 	{
 		pthread_create((conf->ph + i)->thread_id, NULL, routine, (void *)(conf->ph + i));

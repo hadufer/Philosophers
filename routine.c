@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 14:35:49 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 18:44:49 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	eat(t_philo *ph)
 	putstr_ph("is eating", ph);
 	ph->time_begin_eat = actual_time();
 	ft_usleep(ph->conf->time_to_eat);
+	ph->eat_time += 1;
 }
 
 void	sleep_think(t_philo *ph)
@@ -46,6 +47,11 @@ void	*routine(void *conf_ph)
 	pthread_detach(watch);
 	while (1)
 	{
+		if (ph->conf->need_to_eat && (ph->eat_time == ph->conf->need_to_eat))
+		{
+			ph->conf->ph_already_eat += 1;
+			break ;
+		}
 		eat(ph);
 		sleep_think(ph);
 	}
