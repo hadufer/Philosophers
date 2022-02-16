@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:38 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/15 18:19:22 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:16:35 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_config t_config;
 typedef struct s_philo
 {
 	int	ph_id; // the id of the philo
-	int	is_dead; // tell us if philo is supposed to be dead
 	long int time_begin_eat; // the time when ph beginned to eat
 	t_config	*conf;	// pointer to conf
 	pthread_t	*thread_id; // actual thread
@@ -38,9 +37,11 @@ typedef struct s_config {
 	int	time_to_sleep;
 	int	number_of_times_each_philosopher_must_eat;
 	long int	start_time_ms;
+	int	stop_print;	// Dont print if the program need to stop
 	t_philo	*ph; // philo tab
 	pthread_mutex_t	writer_m; // mutex
 	pthread_mutex_t	game_over_m; // mutex game over
+	pthread_mutex_t	death_print_m; // death mutex
 }	t_config;
 
 int		check_args(int argc, char **argv);

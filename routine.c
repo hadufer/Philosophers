@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/15 19:02:49 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/16 12:20:06 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	eat(t_philo *ph)
 	putstr_ph("has taken a fork", ph);
 	putstr_ph("is eating", ph);
 	ph->time_begin_eat = actual_time();
-	pthread_create(ph->thread_id, NULL, routine_watcher, (void *)(ph));
 	ft_usleep(ph->conf->time_to_eat);
 }
 
@@ -38,8 +37,13 @@ void	sleep_think(t_philo *ph)
 void	*routine(void *conf_ph)
 {
 	t_philo	*ph;
+	pthread_t	watch;
 
 	ph = (t_philo *)conf_ph;
+	if ((ph->ph_id % 2) == 0)
+		ft_usleep(ph->conf->time_to_eat / 100);
+	pthread_create(&watch, NULL, routine_watcher, (void *)(ph));
+	pthread_detach(watch);
 	while (1)
 	{
 		eat(ph);
