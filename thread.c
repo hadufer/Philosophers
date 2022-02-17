@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:15:58 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 18:50:53 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/17 15:55:04 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*routine_watcher(void *conf_ph)
 	ph = (t_philo *)conf_ph;
 	while (1)
 	{
-		if (ph->conf->need_to_eat && (ph->eat_time == ph->conf->need_to_eat))
+		if (ph->conf->need_to_eat && (ph->eat_time >= ph->conf->need_to_eat))
 			break ;
 		if (ph->time_begin_eat + ph->conf->time_to_die <= actual_time())
 		{

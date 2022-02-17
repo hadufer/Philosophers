@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:06:03 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 18:45:03 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/17 15:57:48 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	init_conf_ph(t_config *conf)
 	{
 		(conf->ph + i)->conf = conf;
 		(conf->ph + i)->ph_id = i + 1;
+		(conf->ph + i)->eat_time = 0;
 		(conf->ph + i)->thread_id = malloc(sizeof(pthread_t));
 		(conf->ph + i)->r_f = NULL;
 		(conf->ph + i)->time_begin_eat = conf->start_time_ms;
