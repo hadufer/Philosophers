@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:42 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/16 18:33:08 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:03:35 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	else if (!check_args(argc, argv))
 		ft_putstr_fd(ERR_ARG, 1);
 	else if (!init_conf_args(argc, argv, &conf))
+		ft_putstr_fd(ERR_ARG, 1);
+	else if (ft_atoi(argv[1]) == 0)
 		ft_putstr_fd(ERR_ARG, 1);
 	else
 	{
