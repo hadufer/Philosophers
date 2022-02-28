@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:42 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 16:23:12 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/28 16:33:50 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,5 @@ int	main(int argc, char **argv)
 		launch_thread(&conf);
 		pthread_mutex_lock(&conf.game_over_m);
 		cleanup_conf_ph(&conf);
-	}
-	while (1)
-	{
-		
 	}
 }
