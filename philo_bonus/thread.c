@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hadufer <hadufer@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:15:58 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/17 15:55:04 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/17 22:49:03 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	*routine_watcher(void *conf_ph)
 void	*eat_time_watcher(void *v_conf)
 {
 	t_config	*conf;
-	int	ph_count;
 
-	ph_count = 0;
 	conf = (t_config *)v_conf;
 	while (1)
 	{
