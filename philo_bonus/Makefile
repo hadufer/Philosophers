@@ -6,14 +6,14 @@
 #    By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/28 15:24:12 by hadufer           #+#    #+#              #
-#    Updated: 2022/02/28 18:54:44 by hadufer          ###   ########.fr        #
+#    Updated: 2022/02/28 19:56:16 by hadufer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo_bonus
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS	=	ft_usleep.c \
 			main.c \
