@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/17 15:58:02 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:33:58 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sleep_think(t_philo *ph)
 
 void	*routine(void *conf_ph)
 {
-	t_philo	*ph;
+	t_philo		*ph;
 	pthread_t	watch;
 
 	ph = (t_philo *)conf_ph;
