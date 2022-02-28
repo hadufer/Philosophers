@@ -6,13 +6,14 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:15:58 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 16:13:13 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:25:43 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void	*routine_watcher(void *conf_ph)
 {
@@ -29,6 +30,7 @@ void	*routine_watcher(void *conf_ph)
 			pthread_mutex_lock(&ph->conf->death_m);
 			printf("%ld %d died\n", actual_time() - ph->conf->start_time_ms, ph->ph_id);
 			pthread_mutex_unlock(&ph->conf->game_over_m);
+			pthread_detach(*ph->thread_id);
 			return (NULL);
 		}
 	}

@@ -6,14 +6,14 @@
 #    By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/28 15:24:12 by hadufer           #+#    #+#              #
-#    Updated: 2022/02/16 12:21:59 by hadufer          ###   ########.fr        #
+#    Updated: 2022/02/28 17:26:08 by hadufer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 CC = cc
 RM = rm -f
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS	=	$(wildcard *.c)
 

@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:42 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 16:33:43 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:28:53 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdio.h>
-
-static void cleanup_conf_ph(t_config *conf)
-{
-	int	i;
-
-	i = 0;
-	while (i < conf->number_of_philosophers)
-	{
-		free((conf->ph + i)->thread_id);
-		i++;
-	}
-	free(conf->ph);
-}
 
 int	main(int argc, char **argv)
 {
@@ -45,6 +32,5 @@ int	main(int argc, char **argv)
 		init_conf_ph(&conf);
 		launch_thread(&conf);
 		pthread_mutex_lock(&conf.game_over_m);
-		cleanup_conf_ph(&conf);
 	}
 }
