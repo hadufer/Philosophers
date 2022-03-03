@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:06:03 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 16:22:08 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:57:00 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ int	init_conf_args(int argc, char **argv, t_config *conf)
 	conf->start_time_ms = actual_time();
 	conf->stop_print = 0;
 	conf->ph = malloc(sizeof(t_philo) * conf->number_of_philosophers);
+	pthread_mutex_init(&conf->actual_time_m, NULL);
 	pthread_mutex_init(&conf->game_over_m, NULL);
 	pthread_mutex_init(&conf->writer_m, NULL);
 	pthread_mutex_init(&conf->death_m, NULL);
+	pthread_mutex_init(&conf->stop_print_m, NULL);
+	pthread_mutex_init(&conf->ph_already_eat_m, NULL);
 	if (argc == 6)
 		conf->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	else
@@ -93,6 +96,8 @@ void	init_conf_ph(t_config *conf)
 		(conf->ph + i)->thread_id = malloc(sizeof(pthread_t));
 		(conf->ph + i)->r_f = NULL;
 		(conf->ph + i)->time_begin_eat = conf->start_time_ms;
+		(conf->ph + i)->thread_watcher = NULL;
+		pthread_mutex_init(&(conf->ph + i)->eat_time_m, NULL);
 		pthread_mutex_init(&(conf->ph + i)->l_f, NULL);
 		if (i == (conf->number_of_philosophers - 1))
 			(conf->ph + i)->r_f = &conf->ph->l_f;

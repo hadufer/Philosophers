@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:38 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 17:33:37 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:55:17 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ typedef struct s_philo
 	long int		time_begin_eat;
 	t_config		*conf;
 	pthread_t		*thread_id;
+	pthread_t		*thread_watcher;
 	pthread_mutex_t	*r_f;
 	pthread_mutex_t	l_f;
+	pthread_mutex_t	eat_time_m;
 }	t_philo;
 
 typedef struct s_config {
@@ -45,6 +47,9 @@ typedef struct s_config {
 	pthread_mutex_t	writer_m;
 	pthread_mutex_t	game_over_m;
 	pthread_mutex_t	death_m;
+	pthread_mutex_t	actual_time_m;
+	pthread_mutex_t	stop_print_m;
+	pthread_mutex_t	ph_already_eat_m;
 	pthread_t		eat_time_watcher;
 }	t_config;
 

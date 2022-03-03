@@ -6,14 +6,14 @@
 #    By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/28 15:24:12 by hadufer           #+#    #+#              #
-#    Updated: 2022/02/28 17:39:01 by hadufer          ###   ########.fr        #
+#    Updated: 2022/03/01 15:54:32 by hadufer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
 
 SRCS	=	ft_usleep.c \
 			main.c \

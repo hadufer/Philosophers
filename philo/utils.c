@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 07:09:08 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 17:34:42 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/01 16:13:31 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void	ft_putstr_fd(char *s, int fd)
 void	putstr_ph(char *str, t_philo *ph)
 {
 	pthread_mutex_lock(&ph->conf->writer_m);
+	pthread_mutex_lock(&ph->conf->stop_print_m);
 	if (!ph->conf->stop_print)
 		printf("%ld %d %s\n",
 			actual_time() - ph->conf->start_time_ms, ph->ph_id, str);
+	pthread_mutex_unlock(&ph->conf->stop_print_m);
 	pthread_mutex_unlock(&ph->conf->writer_m);
 }

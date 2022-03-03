@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:14:59 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 17:33:58 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:57:28 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ void	eat(t_philo *ph)
 	pthread_mutex_lock(ph->r_f);
 	putstr_ph("has taken a fork", ph);
 	putstr_ph("is eating", ph);
+	pthread_mutex_lock(&ph->conf->actual_time_m);
 	ph->time_begin_eat = actual_time();
+	pthread_mutex_unlock(&ph->conf->actual_time_m);
 	ft_usleep(ph->conf->time_to_eat);
+	pthread_mutex_lock(&ph->eat_time_m);
 	ph->eat_time += 1;
+	pthread_mutex_unlock(&ph->eat_time_m);
 }
 
 void	sleep_think(t_philo *ph)
@@ -43,13 +47,15 @@ void	*routine(void *conf_ph)
 	ph = (t_philo *)conf_ph;
 	if ((ph->ph_id % 2) == 0)
 		ft_usleep(ph->conf->time_to_eat / 10);
+	ph->thread_watcher = &watch;
 	pthread_create(&watch, NULL, routine_watcher, (void *)(ph));
-	pthread_detach(watch);
 	while (1)
 	{
 		if (ph->conf->need_to_eat && (ph->eat_time == ph->conf->need_to_eat))
 		{
+			pthread_mutex_lock(&ph->conf->ph_already_eat_m);
 			ph->conf->ph_already_eat += 1;
+			pthread_mutex_unlock(&ph->conf->ph_already_eat_m);
 			break ;
 		}
 		eat(ph);
