@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:42 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 18:10:53 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/12 10:10:43 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdio.h>
+#include <sys/semaphore.h>
 
 int	main(int argc, char **argv)
 {
@@ -33,4 +34,5 @@ int	main(int argc, char **argv)
 		launch_thread(&conf);
 		sem_wait(conf.game_over_s);
 	}
+	ft_usleep(1000);
 }

@@ -6,7 +6,7 @@
 #    By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/28 15:24:12 by hadufer           #+#    #+#              #
-#    Updated: 2022/02/28 19:56:16 by hadufer          ###   ########.fr        #
+#    Updated: 2022/03/12 10:22:35 by hadufer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	=	ft_usleep.c \
 			routine.c \
 			thread.c \
 			utils.c \
+			ft_itoa.c \
 
 OBJS = $(SRCS:.c=.o)
 

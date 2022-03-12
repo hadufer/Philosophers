@@ -6,7 +6,7 @@
 /*   By: hadufer <hadufer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:24:38 by hadufer           #+#    #+#             */
-/*   Updated: 2022/02/28 19:34:24 by hadufer          ###   ########.fr       */
+/*   Updated: 2022/03/08 22:53:49 by hadufer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # define ERR_INIT "Error while initing t_config struct\n"
 
 # include	<pthread.h>
-# include <sys/semaphore.h>
-# include <fcntl.h>
+# include	<sys/semaphore.h>
 
 typedef struct s_config	t_config;
 
@@ -29,10 +28,12 @@ typedef struct s_philo
 	long int		time_begin_eat;
 	t_config		*conf;
 	pthread_t		*thread_id;
+	pthread_t		*thread_watcher;
+	sem_t			*eat_time_s;
 }	t_philo;
 
 typedef struct s_config {
-	int				num_ph;
+	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -45,6 +46,9 @@ typedef struct s_config {
 	sem_t			*writer_s;
 	sem_t			*game_over_s;
 	sem_t			*death_s;
+	sem_t			*actual_time_s;
+	sem_t			*stop_print_s;
+	sem_t			*ph_already_eat_s;
 	sem_t			*f_bowl;
 	pthread_t		eat_time_watcher;
 }	t_config;
@@ -61,6 +65,8 @@ long int	actual_time(void);
 void		ft_usleep(int ms);
 int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
+char		*ft_itoa(int n);
+int			ft_strlen(char *str);
 void		ft_putstr_fd(char *s, int fd);
 void		putstr_ph(char *str, t_philo *ph);
 #endif
